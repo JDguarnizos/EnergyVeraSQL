@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class facturaVenta {
     
-    private int idFacturaVenta;
-    private Date fechaFacturaVenta;
+    private int idFacturaV;
+    private Date fechaFacturaV;
     private double iva;
     private int idCliente;
     private int idVendedor;
@@ -13,28 +13,28 @@ public class facturaVenta {
     public facturaVenta() {
     }
 
-    public facturaVenta(int idFacturaVenta, Date fechaFacturaVenta, double iva, int idCliente, int idVendedor) {
-        this.idFacturaVenta = idFacturaVenta;
-        this.fechaFacturaVenta = fechaFacturaVenta;
+    public facturaVenta(int idFacturaVenta, Date fechaFacturaV, double iva, int idCliente, int idVendedor) {
+        this.idFacturaV = idFacturaV;
+        this.fechaFacturaV = fechaFacturaV;
         this.iva = iva;
         this.idCliente = idCliente;
         this.idVendedor = idVendedor;
     }
 
     public int getIdFacturaVenta() {
-        return idFacturaVenta;
+        return idFacturaV;
     }
 
     public void setIdFacturaVenta(int idFacturaVenta) {
-        this.idFacturaVenta = idFacturaVenta;
+        this.idFacturaV = idFacturaVenta;
     }
 
-    public Date getFechaFacturaVenta() {
-        return fechaFacturaVenta;
+    public Date getFechaFacturaV() {
+        return fechaFacturaV;
     }
 
-    public void setFechaFacturaVenta(Date fechaFacturaVenta) {
-        this.fechaFacturaVenta = fechaFacturaVenta;
+    public void setFechaFacturaV(Date fechaFacturaVenta) {
+        this.fechaFacturaV = fechaFacturaVenta;
     }
 
     public double getIva() {
