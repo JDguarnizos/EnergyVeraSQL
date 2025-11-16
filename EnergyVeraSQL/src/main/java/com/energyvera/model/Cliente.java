@@ -4,21 +4,17 @@ public class Cliente {
 
     private int idCliente;
     private String nombre;
-    private String apellido;
     private String direccion;
-    private String telefono;
-    private String correo;
+    private String email;
 
     public Cliente() {
     }
 
-    public Cliente(int idCliente, String nombre, String apellido, String direccion, String telefono, String correo) {
+    public Cliente(int idCliente, String nombre, String direccion, String telefono, String email) {
         this.idCliente = idCliente;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.direccion = direccion;
-        this.telefono = telefono;
-        this.correo = correo;
+        this.email = email;
     }
 
     public int getIdCliente() {
@@ -37,14 +33,6 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
     public String getDireccion() {
         return direccion;
     }
@@ -53,25 +41,17 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String correo) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
-        return nombre + " " + apellido;
+        return nombre + " " + email;
     }
 
 }

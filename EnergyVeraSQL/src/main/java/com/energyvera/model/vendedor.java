@@ -4,19 +4,15 @@ public class vendedor {
     
     private int idVendedor;
     private String nombre;
-    private String apellido;
-    private String telefono;
-    private String correo;
+    private String cargo;
 
     public vendedor() {
     }
 
-    public vendedor(int idVendedor, String nombre, String apellido, String telefono, String correo) {
+    public vendedor(int idVendedor, String nombre, String cargo) {
         this.idVendedor = idVendedor;
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.telefono = telefono;
-        this.correo = correo;
+        this.cargo = cargo;
     }
 
     public int getIdVendedor() {
@@ -35,32 +31,18 @@ public class vendedor {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+    
     
     @Override
     public String toString(){
-    return nombre + " " + apellido;
+    return nombre + " - " + cargo + " - " + idVendedor;
     }
 }
