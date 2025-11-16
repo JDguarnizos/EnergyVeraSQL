@@ -18,7 +18,7 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setDate(1, factura.getFechaFacturaVenta());
+            stmt.setDate(1, factura.getFechaFacturaV());
             stmt.setDouble(2, factura.getIva());
             stmt.setInt(3, factura.getIdCliente());
             stmt.setInt(4, factura.getIdVendedor());
@@ -38,7 +38,7 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setDate(1, factura.getFechaFacturaVenta());
+            stmt.setDate(1, factura.getFechaFacturaV());
             stmt.setDouble(2, factura.getIva());
             stmt.setInt(3, factura.getIdCliente());
             stmt.setInt(4, factura.getIdVendedor());
@@ -80,7 +80,7 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
                 if (rs.next()) {
                     factura = new facturaVenta();
                     factura.setIdFacturaVenta(rs.getInt("idFacturaVenta"));
-                    factura.setFechaFacturaVenta(rs.getDate("fechaFacturaVenta"));
+                    factura.setFechaFacturaV(rs.getDate("fechaFacturaVenta"));
                     factura.setIva(rs.getDouble("iva"));
                     factura.setIdCliente(rs.getInt("idCliente"));
                     factura.setIdVendedor(rs.getInt("idVendedor"));
@@ -106,7 +106,7 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
             while (rs.next()) {
                 facturaVenta factura = new facturaVenta();
                 factura.setIdFacturaVenta(rs.getInt("idFacturaVenta"));
-                factura.setFechaFacturaVenta(rs.getDate("fechaFacturaVenta"));
+                factura.setFechaFacturaV(rs.getDate("fechaFacturaVenta"));
                 factura.setIva(rs.getDouble("iva"));
                 factura.setIdCliente(rs.getInt("idCliente"));
                 factura.setIdVendedor(rs.getInt("idVendedor"));
