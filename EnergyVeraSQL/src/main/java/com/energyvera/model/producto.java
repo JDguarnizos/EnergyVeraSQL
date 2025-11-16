@@ -4,11 +4,10 @@ public class producto {
 
     private int idProducto;
     private String marca;
-    private String descripcion;
     private double precio;
-    private int idProveedor;
     private int stock;
-    private int tipo;
+    private String tipo;
+
 
     public producto() {
     }
@@ -16,11 +15,9 @@ public class producto {
     public producto(int idProducto, String marca, String descripcion, double precio, int idProveedor, int stock, int tipo) {
         this.idProducto = idProducto;
         this.marca = marca;
-        this.descripcion = descripcion;
         this.precio = precio;
-        this.idProveedor = idProveedor;
         this.stock = stock;
-        this.tipo = tipo;
+
     }
 
     public int getIdProducto() {
@@ -39,28 +36,12 @@ public class producto {
         this.marca = marca;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public double getPrecio() {
         return precio;
     }
 
     public void setPrecio(double precio) {
         this.precio = precio;
-    }
-
-    public int getIdProveedor() {
-        return idProveedor;
-    }
-
-    public void setIdProveedor(int idProveedor) {
-        this.idProveedor = idProveedor;
     }
 
     public int getStock() {
@@ -70,15 +51,14 @@ public class producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
-
-    public int getTipo() {
+    
+    public String getTipo(){
         return tipo;
     }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    
+    public void setTipo(String tipo){
+        this.tipo= tipo;
     }
-
     @Override
 
     public String toString() {

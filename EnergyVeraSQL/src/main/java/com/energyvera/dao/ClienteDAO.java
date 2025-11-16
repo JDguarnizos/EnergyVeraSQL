@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.energyvera.dao;
 
-/**
- *
- * @author USUARIO
- */
-public class ClienteDAO {
-    
+import com.energyvera.model.Cliente;
+import java.util.List;
+
+
+public interface ClienteDAO {
+    void insertar(Cliente cliente);
+    void actualizar(Cliente cliente);
+    void eliminar(int id);
+    Cliente obtenerPorId(int id);
+    List<Cliente> obtenerTodos();
 }
