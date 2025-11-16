@@ -1,22 +1,26 @@
 package com.energyvera.model;
 
 public class producto {
-    
+
     private int idProducto;
-    private String nombre;
+    private String marca;
     private String descripcion;
     private double precio;
     private int idProveedor;
+    private int stock;
+    private int tipo;
 
     public producto() {
     }
 
-    public producto(int idProducto, String nombre, String descripcion, double precio, int idProveedor) {
+    public producto(int idProducto, String marca, String descripcion, double precio, int idProveedor, int stock, int tipo) {
         this.idProducto = idProducto;
-        this.nombre = nombre;
+        this.marca = marca;
         this.descripcion = descripcion;
         this.precio = precio;
         this.idProveedor = idProveedor;
+        this.stock = stock;
+        this.tipo = tipo;
     }
 
     public int getIdProducto() {
@@ -27,12 +31,12 @@ public class producto {
         this.idProducto = idProducto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     public String getDescripcion() {
@@ -57,6 +61,31 @@ public class producto {
 
     public void setIdProveedor(int idProveedor) {
         this.idProveedor = idProveedor;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+
+    public String toString() {
+        return "Producto:\n"
+                + "  ID: " + idProducto + "\n"
+                + "  Marca: " + marca + "\n"
+                + "  Tipo: " + tipo;
     }
 
 }
