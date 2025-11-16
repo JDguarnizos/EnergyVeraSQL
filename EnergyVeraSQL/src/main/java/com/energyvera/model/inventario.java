@@ -1,13 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.energyvera.model;
 
-/**
- *
- * @author valen
- */
 public class inventario {
+    
+    private int idInventario;
+    private String ubicacion;
+
+    public inventario() {
+    }
+
+    public inventario(int idInventario, String ubicacion) {
+        this.idInventario = idInventario;
+        this.ubicacion = ubicacion;
+    }
+
+    public int getIdInventario() {
+        return idInventario;
+    }
+
+    public void setIdInventario(int idInventario) {
+        this.idInventario = idInventario;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventario: " + "IDInventario:" + idInventario + ", Ubicacion:" + ubicacion + '}';
+    }
     
 }
