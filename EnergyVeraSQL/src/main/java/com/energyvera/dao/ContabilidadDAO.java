@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.energyvera.dao;
 
-/**
- *
- * @author USUARIO
- */
-public class ContabilidadDAO {
-    
+import com.energyvera.model.contabilidad;
+import java.util.List;
+
+
+public interface ContabilidadDAO {
+    void insertar(contabilidad contabilidad);
+    void actualizar(contabilidad contabilidad);
+    void eliminar(int id);
+    contabilidad obtenerPorId(int id);
+    List<contabilidad> obtenerTodos();
 }

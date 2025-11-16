@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.energyvera.dao;
 
-/**
- *
- * @author USUARIO
- */
-public class FacturaCompraDAO {
-    
+import com.energyvera.model.facturaCompra;
+import java.util.List;
+
+
+public interface FacturaCompraDAO {
+    void insertar(facturaCompra facturaCompra);
+    void actualizar(facturaCompra facturaCompra);
+    void eliminar(int id);
+    facturaCompra obtenerPorId(int id);
+    List<facturaCompra> obtenerTodos();
 }
