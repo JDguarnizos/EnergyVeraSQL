@@ -31,7 +31,7 @@ public class inventario {
 
     @Override
     public String toString() {
-        return "Inventario: " + "IDInventario:" + idInventario + ", Ubicacion:" + ubicacion + '}';
+        return "Inventario: " + "IDInventario:" + idInventario + ", Ubicacion:" + ubicacion;
     }
     
 }
