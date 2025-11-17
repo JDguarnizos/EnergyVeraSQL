@@ -189,7 +189,10 @@ public class FrmEditarCliente extends javax.swing.JFrame {
             }
 
             // Cerrar la ventana
+            parentForm.mostrarListaClientes();
             this.dispose();
+
+
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
@@ -203,7 +206,9 @@ public class FrmEditarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_Guardar_jButtonActionPerformed
 
     private void Cancelar_jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancelar_jButton2ActionPerformed
-        // TODO add your handling code here:
+        parentForm.mostrarListaClientes();
+        this.dispose();
+
     }//GEN-LAST:event_Cancelar_jButton2ActionPerformed
 
     public void obtenerDatos() {
