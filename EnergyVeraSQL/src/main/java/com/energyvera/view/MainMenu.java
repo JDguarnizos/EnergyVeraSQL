@@ -3,19 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.energyvera.view;
+
+import com.energyvera.dao.ClienteDAO;
+import com.energyvera.daoImpl.ClienteDAOImpl;
 import com.energyvera.service.*;
+
 /**
  *
  * @author PC-PERSONAL
  */
 public class MainMenu extends javax.swing.JFrame {
-    clienteService clienteserv;
+
+    private clienteService cteService;
+
     boolean clientesetted = false;
+
     /**
      * Creates new form MainMenu
      */
     public MainMenu() {
         initComponents();
+        ClienteDAO dao = new ClienteDAOImpl();
+        cteService = new clienteService(dao);
     }
 
     /**
@@ -183,7 +192,7 @@ public class MainMenu extends javax.swing.JFrame {
     //Nada de conectar botones, directamente se relaciona su acción con código
     /*Todos los métodos de JButtonActionPerfomed abren una nueva clase 
     del tipo requerido en el paquete y desecha la ventana de menú principal.
-    */
+     */
     private void Productos_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Productos_JButtonActionPerformed
         FrmProductos ventanaPr = new FrmProductos();
         ventanaPr.setVisible(true);
@@ -191,10 +200,11 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_Productos_JButtonActionPerformed
 
     private void Clientes_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clientes_JButtonActionPerformed
-        FrmClientes ventanaCl = new FrmClientes(clienteserv);
-        ventanaCl.mostrarListaClientes();
-        ventanaCl.setVisible(true);
-        this.dispose();
+
+        FrmClientes ventana = new FrmClientes(cteService);
+        ventana.setVisible(true);
+
+
     }//GEN-LAST:event_Clientes_JButtonActionPerformed
 
     private void Facturas_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Facturas_JButtonActionPerformed
@@ -227,10 +237,10 @@ public class MainMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_Proveedores_JButtonActionPerformed
 
-    public void setServices (clienteService clienteServicepls){
-        clienteserv = clienteServicepls;
+    public void setServices(clienteService clienteServicepls) {
+        cteService = clienteServicepls;
     }
-    
+
     /**
      * @param args the command line arguments
      */

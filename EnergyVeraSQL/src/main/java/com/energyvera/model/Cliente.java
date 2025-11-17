@@ -46,7 +46,7 @@ public class Cliente {
     }
 
     public void setEmail(String correo) {
-        this.email = email;
+        this.email = correo;
     }
 
     @Override

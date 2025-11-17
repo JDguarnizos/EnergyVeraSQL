@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.energyvera.view;
 
+import com.energyvera.dao.VendedorDAO;
+import com.energyvera.daoImpl.VendedorDAOImpl;
 import com.energyvera.model.Cliente;
+import com.energyvera.model.vendedor;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +12,28 @@ import javax.swing.JOptionPane;
  */
 public class FrmEditarCliente extends javax.swing.JFrame {
 
+    private FrmClientes parentForm;
+
     static private Cliente clienteEditar;
+    private vendedor vendedorEditar;
+
     /**
      * Creates new form FrmEditarCliente
      */
-    public FrmEditarCliente(Cliente clienteEditar) {
-        this.clienteEditar = clienteEditar;
+    public FrmEditarCliente(FrmClientes parent, Cliente clienteEditar) {
         initComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        this.parentForm = parent;
+        this.clienteEditar = clienteEditar;
+
+        if (clienteEditar != null) {
+            obtenerDatos();  // ← carga los datos en los campos
+        } else {
+            Codigo_jTextField.setEditable(false);
+            Codigo_jTextField.setText("AUTO");
+        }
     }
 
     /**
@@ -148,65 +162,60 @@ public class FrmEditarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_Email_jTextFieldActionPerformed
 
     private void Guardar_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar_jButtonActionPerformed
-        try{
-            clienteEditar.setIdCliente(Integer.parseInt(Codigo_jTextField.toString()));
-            clienteEditar.setNombre(Nombre_jTextField.getText());
-            clienteEditar.setDireccion(Direccion_jTextField3.getText());
-            clienteEditar.setEmail(Email_jTextField.getText());
-        }catch(Exception NumberFormatException){
-            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Asegurese que los campos ingresados son válidos", 2);
+        try {
+            // Si clienteEditar es null → es un cliente nuevo
+            if (clienteEditar == null) {
+                Cliente nuevo = new Cliente();
+                nuevo.setNombre(Nombre_jTextField.getText());
+                nuevo.setDireccion(Direccion_jTextField3.getText());
+                nuevo.setEmail(Email_jTextField.getText());
+
+                // Llamar a tu DAO
+                com.energyvera.daoImpl.ClienteDAOImpl dao = new com.energyvera.daoImpl.ClienteDAOImpl();
+                dao.insertar(nuevo);
+
+                JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente.");
+            } else {
+                // Editar cliente existente
+                clienteEditar.setNombre(Nombre_jTextField.getText());
+                clienteEditar.setDireccion(Direccion_jTextField3.getText());
+                clienteEditar.setEmail(Email_jTextField.getText());
+
+                // Llamar al DAO para actualizar
+                com.energyvera.daoImpl.ClienteDAOImpl dao = new com.energyvera.daoImpl.ClienteDAOImpl();
+                dao.actualizar(clienteEditar);
+
+                JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente.");
+            }
+
+            // Cerrar la ventana
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error: verifique los datos ingresados",
+                    "Gestión EnergyVera",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
-        //Tengo que llamar al client service pero se me hizo tarde, buenas noches
-        
+
     }//GEN-LAST:event_Guardar_jButtonActionPerformed
 
     private void Cancelar_jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancelar_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Cancelar_jButton2ActionPerformed
 
-    public void obtenerDatos(){
+    public void obtenerDatos() {
         Codigo_jTextField.setText(String.valueOf(clienteEditar.getIdCliente()));
         Nombre_jTextField.setText(clienteEditar.getNombre());
         Direccion_jTextField3.setText(clienteEditar.getDireccion());
         Email_jTextField.setText(clienteEditar.getEmail());
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmEditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmEditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmEditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmEditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmEditarCliente(clienteEditar).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar_jButton2;
