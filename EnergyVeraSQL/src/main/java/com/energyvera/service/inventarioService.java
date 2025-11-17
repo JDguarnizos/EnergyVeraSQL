@@ -4,11 +4,11 @@ import com.energyvera.dao.InventarioDAO;
 import com.energyvera.model.inventario;
 import java.util.List;
 
-public class InventarioService {
+public class inventarioService {
 
     private final InventarioDAO inventarioDAO;
 
-    public InventarioService(InventarioDAO inventarioDAO) {
+    public inventarioService(InventarioDAO inventarioDAO) {
         this.inventarioDAO = inventarioDAO;
     }
 

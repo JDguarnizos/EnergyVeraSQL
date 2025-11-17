@@ -12,7 +12,7 @@ public class InventarioDAOImpl implements InventarioDAO {
 
     @Override
     public void insertar(inventario inventario) {
-        String sql = "INSERT INTO inventario (ubicacion) VALUES (?)";
+        String sql = "INSERT INTO Inventario (Ubicacion) VALUES (?)";
 
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -27,13 +27,14 @@ public class InventarioDAOImpl implements InventarioDAO {
 
     @Override
     public void actualizar(inventario inventario) {
-        String sql = "UPDATE inventario SET ubicacion = ? WHERE idInventario = ?";
+        String sql = "UPDATE Inventario SET Ubicacion = ? WHERE ID_Inventario = ?";
 
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, inventario.getUbicacion());
             stmt.setInt(2, inventario.getIdInventario());
+
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -43,7 +44,7 @@ public class InventarioDAOImpl implements InventarioDAO {
 
     @Override
     public void eliminar(int id) {
-        String sql = "DELETE FROM inventario WHERE idInventario = ?";
+        String sql = "DELETE FROM Inventario WHERE ID_Inventario = ?";
 
         try (Connection conn = Conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -58,7 +59,7 @@ public class InventarioDAOImpl implements InventarioDAO {
 
     @Override
     public inventario obtenerPorId(int id) {
-        String sql = "SELECT * FROM inventario WHERE idInventario = ?";
+        String sql = "SELECT * FROM Inventario WHERE ID_Inventario = ?";
         inventario inv = null;
 
         try (Connection conn = Conexion.getConnection();
@@ -69,8 +70,8 @@ public class InventarioDAOImpl implements InventarioDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     inv = new inventario();
-                    inv.setIdInventario(rs.getInt("idInventario"));
-                    inv.setUbicacion(rs.getString("ubicacion"));
+                    inv.setIdInventario(rs.getInt("ID_Inventario"));
+                    inv.setUbicacion(rs.getString("Ubicacion"));
                 }
             }
 
@@ -83,7 +84,7 @@ public class InventarioDAOImpl implements InventarioDAO {
 
     @Override
     public List<inventario> obtenerTodos() {
-        String sql = "SELECT * FROM inventario";
+        String sql = "SELECT * FROM Inventario";
         List<inventario> lista = new ArrayList<>();
 
         try (Connection conn = Conexion.getConnection();
@@ -92,8 +93,9 @@ public class InventarioDAOImpl implements InventarioDAO {
 
             while (rs.next()) {
                 inventario inv = new inventario();
-                inv.setIdInventario(rs.getInt("idInventario"));
-                inv.setUbicacion(rs.getString("ubicacion"));
+                inv.setIdInventario(rs.getInt("ID_Inventario"));
+                inv.setUbicacion(rs.getString("Ubicacion"));
+
                 lista.add(inv);
             }
 

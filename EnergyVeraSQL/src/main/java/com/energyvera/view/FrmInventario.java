@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.energyvera.view;
 
 import com.energyvera.daoImpl.InventarioDAOImpl;
@@ -25,7 +22,7 @@ public class FrmInventario extends javax.swing.JFrame {
         initComponents();
         inventarioService = new inventarioService(new InventarioDAOImpl());
 
-    }
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
