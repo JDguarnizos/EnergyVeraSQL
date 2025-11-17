@@ -4,16 +4,24 @@
  */
 package com.energyvera.view;
 
+import com.energyvera.model.Cliente;
+import com.energyvera.service.clienteService;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author PC-PERSONAL
  */
 public class FrmClientes extends javax.swing.JFrame {
 
+    static private clienteService cteService;
+    static private DefaultTableModel listaModelo;
+
     /**
      * Creates new form FrmClientes
      */
-    public FrmClientes() {
+    public FrmClientes(clienteService cteService) {
         initComponents();
     }
 
@@ -28,6 +36,12 @@ public class FrmClientes extends javax.swing.JFrame {
 
         main_jPanel = new javax.swing.JPanel();
         MenuPrincipal_JButton = new javax.swing.JButton();
+        Title_jLabel = new javax.swing.JLabel();
+        EnergyVera_jLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        VistaClientes_jTable = new javax.swing.JTable();
+        AnadirCliente_jButton = new javax.swing.JButton();
+        EditarCliente_jButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,19 +52,94 @@ public class FrmClientes extends javax.swing.JFrame {
             }
         });
 
+        Title_jLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Title_jLabel.setText("Clientes");
+
+        EnergyVera_jLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EnergyVera_jLabel.setText("Gestión EnergyVera");
+
+        VistaClientes_jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Nombre", "Dirección", "Email"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(VistaClientes_jTable);
+
+        AnadirCliente_jButton.setText("Añadir Cliente");
+        AnadirCliente_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnadirCliente_jButtonActionPerformed(evt);
+            }
+        });
+
+        EditarCliente_jButton.setText("Editar Cliente Seleccionado");
+        EditarCliente_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarCliente_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout main_jPanelLayout = new javax.swing.GroupLayout(main_jPanel);
         main_jPanel.setLayout(main_jPanelLayout);
         main_jPanelLayout.setHorizontalGroup(
             main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_jPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(MenuPrincipal_JButton)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_jPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_jPanelLayout.createSequentialGroup()
+                                .addComponent(AnadirCliente_jButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(EditarCliente_jButton))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)))
+                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(EnergyVera_jLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(main_jPanelLayout.createSequentialGroup()
+                .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(MenuPrincipal_JButton))
+                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(Title_jLabel)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         main_jPanelLayout.setVerticalGroup(
             main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_jPanelLayout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(EnergyVera_jLabel)
+                .addGap(3, 3, 3)
+                .addComponent(Title_jLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EditarCliente_jButton)
+                    .addComponent(AnadirCliente_jButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(MenuPrincipal_JButton)
                 .addContainerGap())
         );
@@ -69,11 +158,53 @@ public class FrmClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void MenuPrincipal_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPrincipal_JButtonActionPerformed
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_MenuPrincipal_JButtonActionPerformed
+
+    private void EditarCliente_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarCliente_jButtonActionPerformed
+        try{
+        if (VistaClientes_jTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Debe seleccionar un cliente o añadir uno si no hay.", 2);
+        } else {
+            int seleccionado = VistaClientes_jTable.getSelectedRow();
+            Cliente clienteEditado = cteService.buscarCliente(Integer.parseInt(VistaClientes_jTable.getValueAt(seleccionado,0).toString()));
+            
+            //
+            
+        }
+        }catch (Exception NumberFormatException){
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Ingrese un valor válido", 3);
+        }
+    }//GEN-LAST:event_EditarCliente_jButtonActionPerformed
+
+    private void AnadirCliente_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnadirCliente_jButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AnadirCliente_jButtonActionPerformed
+
+    public void mostrarListaClientes() {
+        listaModelo = new DefaultTableModel(
+                new Object[]{"Código", "Nombre", "Dirección", "Email"}, 0
+        );
+        VistaClientes_jTable.setModel(listaModelo);
+        if (cteService.listarClientes() == null) {
+            return;
+        }
+
+        listaModelo.setRowCount(0);
+        
+        for (Cliente c : cteService.listarClientes()) {
+            listaModelo.addRow(new Object[]{
+                c.getIdCliente(),
+                c.getNombre(),
+                c.getDireccion(),
+                c.getEmail()
+            });
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -105,13 +236,20 @@ public class FrmClientes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmClientes().setVisible(true);
+                new FrmClientes(cteService).setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AnadirCliente_jButton;
+    private javax.swing.JButton EditarCliente_jButton;
+    private javax.swing.JLabel EnergyVera_jLabel;
     private javax.swing.JButton MenuPrincipal_JButton;
+    private javax.swing.JLabel Title_jLabel;
+    private javax.swing.JTable VistaClientes_jTable;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel main_jPanel;
     // End of variables declaration//GEN-END:variables
 }
