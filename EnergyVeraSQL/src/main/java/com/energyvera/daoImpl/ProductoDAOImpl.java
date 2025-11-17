@@ -1,26 +1,22 @@
 package com.energyvera.daoImpl;
 
-
 import com.energyvera.dao.ProductoDAO;
 import com.energyvera.model.producto;
 import com.energyvera.conexion.Conexion;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoDAOImpl implements ProductoDAO {
 
-    private Connection conexion;
-
-    public ProductoDAOImpl() {
-        conexion = Conexion.getConnection();
-    }
-
     @Override
     public boolean registrar(producto p) {
         String sql = "INSERT INTO producto (marca, precio, stock, tipo) VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        try (Connection con = Conexion.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
             ps.setString(1, p.getMarca());
             ps.setDouble(2, p.getPrecio());
             ps.setInt(3, p.getStock());
@@ -38,7 +34,9 @@ public class ProductoDAOImpl implements ProductoDAO {
     public boolean actualizar(producto p) {
         String sql = "UPDATE producto SET marca = ?, precio = ?, stock = ?, tipo = ? WHERE idProducto = ?";
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        try (Connection con = Conexion.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
             ps.setString(1, p.getMarca());
             ps.setDouble(2, p.getPrecio());
             ps.setInt(3, p.getStock());
@@ -57,9 +55,10 @@ public class ProductoDAOImpl implements ProductoDAO {
     public boolean eliminar(int idProducto) {
         String sql = "DELETE FROM producto WHERE idProducto = ?";
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-            ps.setInt(1, idProducto);
+        try (Connection con = Conexion.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
+            ps.setInt(1, idProducto);
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -73,18 +72,20 @@ public class ProductoDAOImpl implements ProductoDAO {
         String sql = "SELECT * FROM producto WHERE idProducto = ?";
         producto p = null;
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        try (Connection con = Conexion.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
             ps.setInt(1, idProducto);
 
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                p = new producto();
-                p.setIdProducto(rs.getInt("idProducto"));
-                p.setMarca(rs.getString("marca"));
-                p.setPrecio(rs.getDouble("precio"));
-                p.setStock(rs.getInt("stock"));
-                p.setTipo(rs.getString("tipo"));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    p = new producto();
+                    p.setIdProducto(rs.getInt("idProducto"));
+                    p.setMarca(rs.getString("marca"));
+                    p.setPrecio(rs.getDouble("precio"));
+                    p.setStock(rs.getInt("stock"));
+                    p.setTipo(rs.getString("tipo"));
+                }
             }
 
         } catch (SQLException e) {
@@ -99,8 +100,9 @@ public class ProductoDAOImpl implements ProductoDAO {
         String sql = "SELECT * FROM producto";
         List<producto> lista = new ArrayList<>();
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
+        try (Connection con = Conexion.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 producto p = new producto();
@@ -109,7 +111,6 @@ public class ProductoDAOImpl implements ProductoDAO {
                 p.setPrecio(rs.getDouble("precio"));
                 p.setStock(rs.getInt("stock"));
                 p.setTipo(rs.getString("tipo"));
-
                 lista.add(p);
             }
 

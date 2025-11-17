@@ -3,6 +3,7 @@ package com.energyvera.daoImpl;
 import com.energyvera.model.garantia;
 import com.energyvera.conexion.Conexion;
 import com.energyvera.dao.GarantiaDAO;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class GarantiaDAOImpl implements GarantiaDAO {
 
     @Override
     public void insertar(garantia garantia) {
-        String sql = "INSERT INTO garantia (motivo, fecha, idFacturaV) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO garantia (motivo, fecha, idFacturaVenta) VALUES (?, ?, ?)";
         
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -28,7 +29,7 @@ public class GarantiaDAOImpl implements GarantiaDAO {
 
     @Override
     public void actualizar(garantia garantia) {
-        String sql = "UPDATE garantia SET motivo = ?, fecha = ?, idFacturaV = ? WHERE idGarantia = ?";
+        String sql = "UPDATE garantia SET motivo = ?, fecha = ?, idFacturaVenta = ? WHERE idGarantia = ?";
         
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -75,7 +76,7 @@ public class GarantiaDAOImpl implements GarantiaDAO {
                     rs.getInt("idGarantia"),
                     rs.getString("motivo"),
                     rs.getDate("fecha"),
-                    rs.getInt("idFacturaV")
+                    rs.getInt("idFacturaVenta")
                 );
             }
             
@@ -100,7 +101,7 @@ public class GarantiaDAOImpl implements GarantiaDAO {
                     rs.getInt("idGarantia"),
                     rs.getString("motivo"),
                     rs.getDate("fecha"),
-                    rs.getInt("idFacturaV")
+                    rs.getInt("idFacturaVenta")
                 );
                 lista.add(gar);
             }

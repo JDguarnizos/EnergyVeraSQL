@@ -11,7 +11,7 @@ public class FacturaCompraDAOImpl implements FacturaCompraDAO {
 
     @Override
     public void insertar(facturaCompra fc) {
-        String sql = "INSERT INTO facturaCompra (fechaFacturaC, totalPagar) VALUES (?, ?)";
+        String sql = "INSERT INTO FacturaCompra (FechaFacturaC, TotalPagar) VALUES (?, ?)";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -28,7 +28,7 @@ public class FacturaCompraDAOImpl implements FacturaCompraDAO {
 
     @Override
     public void actualizar(facturaCompra fc) {
-        String sql = "UPDATE facturaCompra SET fechaFacturaC = ?, totalPagar = ? WHERE idFacturaC = ?";
+        String sql = "UPDATE FacturaCompra SET FechaFacturaC = ?, TotalPagar = ? WHERE ID_FacturaC = ?";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -46,7 +46,7 @@ public class FacturaCompraDAOImpl implements FacturaCompraDAO {
 
     @Override
     public void eliminar(int id) {
-        String sql = "DELETE FROM facturaCompra WHERE idFacturaC = ?";
+        String sql = "DELETE FROM FacturaCompra WHERE ID_FacturaC = ?";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -61,7 +61,7 @@ public class FacturaCompraDAOImpl implements FacturaCompraDAO {
 
     @Override
     public facturaCompra obtenerPorId(int id) {
-        String sql = "SELECT * FROM facturaCompra WHERE idFacturaC = ?";
+        String sql = "SELECT * FROM FacturaCompra WHERE ID_FacturaC = ?";
         facturaCompra fc = null;
 
         try (Connection con = Conexion.getConnection();
@@ -72,9 +72,9 @@ public class FacturaCompraDAOImpl implements FacturaCompraDAO {
 
             if (rs.next()) {
                 fc = new facturaCompra(
-                    rs.getInt("idFacturaC"),
-                    rs.getDate("fechaFacturaC"),
-                    rs.getDouble("totalPagar")
+                    rs.getInt("ID_FacturaC"),
+                    rs.getDate("FechaFacturaC"),
+                    rs.getDouble("TotalPagar")
                 );
             }
 
@@ -87,7 +87,7 @@ public class FacturaCompraDAOImpl implements FacturaCompraDAO {
 
     @Override
     public List<facturaCompra> obtenerTodos() {
-        String sql = "SELECT * FROM facturaCompra";
+        String sql = "SELECT * FROM FacturaCompra";
         List<facturaCompra> lista = new ArrayList<>();
 
         try (Connection con = Conexion.getConnection();
@@ -96,9 +96,9 @@ public class FacturaCompraDAOImpl implements FacturaCompraDAO {
 
             while (rs.next()) {
                 facturaCompra fc = new facturaCompra(
-                    rs.getInt("idFacturaC"),
-                    rs.getDate("fechaFacturaC"),
-                    rs.getDouble("totalPagar")
+                    rs.getInt("ID_FacturaC"),
+                    rs.getDate("FechaFacturaC"),
+                    rs.getDouble("TotalPagar")
                 );
                 lista.add(fc);
             }

@@ -10,17 +10,29 @@ import java.util.List;
 
 public class ClienteDAOImpl implements ClienteDAO {
 
+    private static final String INSERT = 
+        "INSERT INTO Cliente (Nombre, Direccion, Email) VALUES (?, ?, ?)";
+
+    private static final String UPDATE = 
+        "UPDATE Cliente SET Nombre = ?, Direccion = ?, Email = ? WHERE ID_Cliente = ?";
+
+    private static final String DELETE = 
+        "DELETE FROM Cliente WHERE ID_Cliente = ?";
+
+    private static final String SELECT_BY_ID = 
+        "SELECT * FROM Cliente WHERE ID_Cliente = ?";
+
+    private static final String SELECT_ALL = 
+        "SELECT * FROM Cliente";
+
     @Override
     public void insertar(Cliente cliente) {
-        String sql = "INSERT INTO Cliente (Nombre, Direccion, Email) VALUES (?, ?, ?)";
-
         try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(INSERT)) {
 
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getDireccion());
             stmt.setString(3, cliente.getEmail());
-
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -30,16 +42,13 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public void actualizar(Cliente cliente) {
-        String sql = "UPDATE Cliente SET Nombre = ?, Direccion = ?, Email = ? WHERE ID_Cliente = ?";
-
         try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(UPDATE)) {
 
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getDireccion());
             stmt.setString(3, cliente.getEmail());
             stmt.setInt(4, cliente.getIdCliente());
-
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -49,10 +58,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public void eliminar(int id) {
-        String sql = "DELETE FROM Cliente WHERE ID_Cliente = ?";
-
         try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(DELETE)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -64,22 +71,20 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public Cliente obtenerPorId(int id) {
-        String sql = "SELECT * FROM Cliente WHERE ID_Cliente = ?";
         Cliente cliente = null;
 
         try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID)) {
 
             stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    cliente = new Cliente();
-                    cliente.setIdCliente(rs.getInt("ID_Cliente"));
-                    cliente.setNombre(rs.getString("Nombre"));
-                    cliente.setDireccion(rs.getString("Direccion"));
-                    cliente.setEmail(rs.getString("Email"));
-                }
+            if (rs.next()) {
+                cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("ID_Cliente"));
+                cliente.setNombre(rs.getString("Nombre"));
+                cliente.setDireccion(rs.getString("Direccion"));
+                cliente.setEmail(rs.getString("Email"));
             }
 
         } catch (SQLException e) {
@@ -91,11 +96,10 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public List<Cliente> obtenerTodos() {
-        String sql = "SELECT * FROM Cliente";
         List<Cliente> lista = new ArrayList<>();
 
         try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {

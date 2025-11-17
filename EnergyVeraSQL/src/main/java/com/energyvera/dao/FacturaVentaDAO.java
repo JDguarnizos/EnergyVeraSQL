@@ -11,5 +11,6 @@ public interface FacturaVentaDAO {
     void eliminar(int id);
     facturaVenta obtenerPorId(int id);
     List<facturaVenta> obtenerTodos();
+    List<facturaVenta> obtenerPorIdVendedor(int idVendedor);
 }
 

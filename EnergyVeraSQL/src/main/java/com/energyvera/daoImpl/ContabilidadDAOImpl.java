@@ -3,6 +3,7 @@ package com.energyvera.daoImpl;
 import com.energyvera.dao.ContabilidadDAO;
 import com.energyvera.model.contabilidad;
 import com.energyvera.conexion.Conexion;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class ContabilidadDAOImpl implements ContabilidadDAO {
 
     @Override
     public void insertar(contabilidad c) {
-        String sql = "INSERT INTO contabilidad (datosFactura, fecha) VALUES (?, ?)";
+        String sql = "INSERT INTO Contabilidad (DatosFactura, Fecha) VALUES (?, ?)";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -28,7 +29,7 @@ public class ContabilidadDAOImpl implements ContabilidadDAO {
 
     @Override
     public void actualizar(contabilidad c) {
-        String sql = "UPDATE contabilidad SET datosFactura = ?, fecha = ? WHERE idContabilidad = ?";
+        String sql = "UPDATE Contabilidad SET DatosFactura = ?, Fecha = ? WHERE ID_Contabilidad = ?";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -46,7 +47,7 @@ public class ContabilidadDAOImpl implements ContabilidadDAO {
 
     @Override
     public void eliminar(int id) {
-        String sql = "DELETE FROM contabilidad WHERE idContabilidad = ?";
+        String sql = "DELETE FROM Contabilidad WHERE ID_Contabilidad = ?";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -61,7 +62,7 @@ public class ContabilidadDAOImpl implements ContabilidadDAO {
 
     @Override
     public contabilidad obtenerPorId(int id) {
-        String sql = "SELECT * FROM contabilidad WHERE idContabilidad = ?";
+        String sql = "SELECT * FROM Contabilidad WHERE ID_Contabilidad = ?";
         contabilidad c = null;
 
         try (Connection con = Conexion.getConnection();
@@ -72,9 +73,9 @@ public class ContabilidadDAOImpl implements ContabilidadDAO {
 
             if (rs.next()) {
                 c = new contabilidad(
-                    rs.getInt("idContabilidad"),
-                    rs.getString("datosFactura"),
-                    rs.getDate("fecha")
+                    rs.getInt("ID_Contabilidad"),
+                    rs.getString("DatosFactura"),
+                    rs.getDate("Fecha")
                 );
             }
 
@@ -87,7 +88,7 @@ public class ContabilidadDAOImpl implements ContabilidadDAO {
 
     @Override
     public List<contabilidad> obtenerTodos() {
-        String sql = "SELECT * FROM contabilidad";
+        String sql = "SELECT * FROM Contabilidad";
         List<contabilidad> lista = new ArrayList<>();
 
         try (Connection con = Conexion.getConnection();
@@ -96,9 +97,9 @@ public class ContabilidadDAOImpl implements ContabilidadDAO {
 
             while (rs.next()) {
                 contabilidad c = new contabilidad(
-                    rs.getInt("idContabilidad"),
-                    rs.getString("datosFactura"),
-                    rs.getDate("fecha")
+                    rs.getInt("ID_Contabilidad"),
+                    rs.getString("DatosFactura"),
+                    rs.getDate("Fecha")
                 );
 
                 lista.add(c);

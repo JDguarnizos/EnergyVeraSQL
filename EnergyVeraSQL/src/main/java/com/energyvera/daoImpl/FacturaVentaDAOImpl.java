@@ -12,11 +12,10 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
 
     @Override
     public void insertar(facturaVenta factura) {
-        String sql = "INSERT INTO factura_venta (fechaFacturaVenta, iva, idCliente, idVendedor) "
-                   + "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO facturaVenta (fechaFacturaVenta, iva, idCliente, idVendedor) "
+                + "VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDate(1, factura.getFechaFacturaV());
             stmt.setDouble(2, factura.getIva());
@@ -32,11 +31,10 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
 
     @Override
     public void actualizar(facturaVenta factura) {
-        String sql = "UPDATE factura_venta SET fechaFacturaVenta = ?, iva = ?, idCliente = ?, idVendedor = ? "
-                   + "WHERE idFacturaVenta = ?";
+        String sql = "UPDATE facturaVenta SET fechaFacturaVenta = ?, iva = ?, idCliente = ?, idVendedor = ? "
+                + "WHERE idFacturaVenta = ?";
 
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDate(1, factura.getFechaFacturaV());
             stmt.setDouble(2, factura.getIva());
@@ -53,10 +51,9 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
 
     @Override
     public void eliminar(int id) {
-        String sql = "DELETE FROM factura_venta WHERE idFacturaVenta = ?";
+        String sql = "DELETE FROM facturaVenta WHERE idFacturaVenta = ?";
 
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -68,11 +65,10 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
 
     @Override
     public facturaVenta obtenerPorId(int id) {
-        String sql = "SELECT * FROM factura_venta WHERE idFacturaVenta = ?";
+        String sql = "SELECT * FROM facturaVenta WHERE idFacturaVenta = ?";
         facturaVenta factura = null;
 
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
 
@@ -96,12 +92,10 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
 
     @Override
     public List<facturaVenta> obtenerTodos() {
-        String sql = "SELECT * FROM factura_venta";
+        String sql = "SELECT * FROM facturaVenta";
         List<facturaVenta> lista = new ArrayList<>();
 
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = Conexion.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 facturaVenta factura = new facturaVenta();
@@ -120,4 +114,34 @@ public class FacturaVentaDAOImpl implements FacturaVentaDAO {
 
         return lista;
     }
+
+    @Override
+    public List<facturaVenta> obtenerPorIdVendedor(int idVendedor) {
+        List<facturaVenta> lista = new ArrayList<>();
+        String sql = "SELECT * FROM facturaVenta WHERE idVendedor = ?";
+
+        try (Connection conn = Conexion.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idVendedor);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                facturaVenta fv = new facturaVenta();
+                fv.setIdFacturaVenta(rs.getInt("idFacturaVenta"));
+                fv.setFechaFacturaV(rs.getDate("fechaFacturaVenta"));
+                fv.setIva(rs.getDouble("iva"));
+                fv.setIdCliente(rs.getInt("idCliente"));
+                fv.setIdVendedor(rs.getInt("idVendedor"));
+
+                lista.add(fv);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al obtener ventas del vendedor: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
 }

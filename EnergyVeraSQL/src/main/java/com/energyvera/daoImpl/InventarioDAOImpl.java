@@ -18,7 +18,6 @@ public class InventarioDAOImpl implements InventarioDAO {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, inventario.getUbicacion());
-
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -35,7 +34,6 @@ public class InventarioDAOImpl implements InventarioDAO {
 
             stmt.setString(1, inventario.getUbicacion());
             stmt.setInt(2, inventario.getIdInventario());
-
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -96,7 +94,6 @@ public class InventarioDAOImpl implements InventarioDAO {
                 inventario inv = new inventario();
                 inv.setIdInventario(rs.getInt("idInventario"));
                 inv.setUbicacion(rs.getString("ubicacion"));
-
                 lista.add(inv);
             }
 
