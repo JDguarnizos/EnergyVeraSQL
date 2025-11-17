@@ -4,17 +4,27 @@
  */
 package com.energyvera.view;
 
+import com.energyvera.daoImpl.InventarioDAOImpl;
+import com.energyvera.service.inventarioService;
+import javax.swing.table.DefaultTableModel;
+import com.energyvera.model.inventario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC-PERSONAL
  */
 public class FrmInventario extends javax.swing.JFrame {
 
+    inventarioService inventarioService;
+
     /**
      * Creates new form FrmInventario
      */
     public FrmInventario() {
         initComponents();
+        inventarioService = new inventarioService(new InventarioDAOImpl());
+
     }
 
     /**
@@ -28,6 +38,12 @@ public class FrmInventario extends javax.swing.JFrame {
 
         Main_JPanel = new javax.swing.JPanel();
         MenuPrincipal_JButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Inventario_jTable = new javax.swing.JTable();
+        AgregarInventario = new javax.swing.JButton();
+        EditarInventario = new javax.swing.JButton();
+        EliminarInventario = new javax.swing.JButton();
+        ActualizarInventario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,20 +54,83 @@ public class FrmInventario extends javax.swing.JFrame {
             }
         });
 
+        Inventario_jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Código", "Ubicación"
+            }
+        ));
+        jScrollPane1.setViewportView(Inventario_jTable);
+
+        AgregarInventario.setText("Agregar al inventario");
+        AgregarInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarInventarioActionPerformed(evt);
+            }
+        });
+
+        EditarInventario.setText("Editar Seleccionado");
+        EditarInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarInventarioActionPerformed(evt);
+            }
+        });
+
+        EliminarInventario.setText("Eliminar del inventario");
+        EliminarInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarInventarioActionPerformed(evt);
+            }
+        });
+
+        ActualizarInventario.setText("Actualizar");
+        ActualizarInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarInventarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Main_JPanelLayout = new javax.swing.GroupLayout(Main_JPanel);
         Main_JPanel.setLayout(Main_JPanelLayout);
         Main_JPanelLayout.setHorizontalGroup(
             Main_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Main_JPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(MenuPrincipal_JButton)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(Main_JPanelLayout.createSequentialGroup()
+                .addGroup(Main_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Main_JPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(MenuPrincipal_JButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ActualizarInventario))
+                    .addGroup(Main_JPanelLayout.createSequentialGroup()
+                        .addComponent(AgregarInventario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EliminarInventario)
+                        .addGap(33, 33, 33)
+                        .addComponent(EditarInventario)))
+                .addContainerGap())
         );
         Main_JPanelLayout.setVerticalGroup(
             Main_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Main_JPanelLayout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
-                .addComponent(MenuPrincipal_JButton)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Main_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AgregarInventario)
+                    .addComponent(EditarInventario)
+                    .addComponent(EliminarInventario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(Main_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MenuPrincipal_JButton)
+                    .addComponent(ActualizarInventario))
                 .addContainerGap())
         );
 
@@ -74,6 +153,97 @@ public class FrmInventario extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_MenuPrincipal_JButtonActionPerformed
+
+    private void AgregarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarInventarioActionPerformed
+
+        FrmEditarInventario ventana = new FrmEditarInventario(this, null);
+        ventana.setVisible(true);
+
+
+    }//GEN-LAST:event_AgregarInventarioActionPerformed
+
+    private void EliminarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarInventarioActionPerformed
+
+        int fila = Inventario_jTable.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Seleccione un inventario para eliminar",
+                    "Advertencia",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Está seguro de eliminar este inventario?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int idInventario = (int) Inventario_jTable.getValueAt(fila, 0);
+
+        inventarioService.eliminarInventario(idInventario);
+
+        mostrarListaInventario();
+
+        JOptionPane.showMessageDialog(this,
+                "Inventario eliminado correctamente",
+                "Información",
+                JOptionPane.INFORMATION_MESSAGE);
+
+
+    }//GEN-LAST:event_EliminarInventarioActionPerformed
+
+    private void EditarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarInventarioActionPerformed
+
+        inventario inv = obtenerInventarioSeleccionado();
+
+        if (inv == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Seleccione un inventario de la tabla",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        FrmEditarInventario ventana = new FrmEditarInventario(this, inv);
+        ventana.setVisible(true);
+
+
+    }//GEN-LAST:event_EditarInventarioActionPerformed
+
+    private void ActualizarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarInventarioActionPerformed
+        mostrarListaInventario();
+
+    }//GEN-LAST:event_ActualizarInventarioActionPerformed
+    public void mostrarListaInventario() {
+
+        DefaultTableModel modelo = (DefaultTableModel) Inventario_jTable.getModel();
+        modelo.setRowCount(0);
+
+        for (inventario inv : inventarioService.listarInventarios()) {
+            modelo.addRow(new Object[]{
+                inv.getIdInventario(),
+                inv.getUbicacion()
+            });
+        }
+    }
+
+    private inventario obtenerInventarioSeleccionado() {
+        int fila = Inventario_jTable.getSelectedRow();
+        if (fila == -1) {
+            return null;
+        }
+
+        inventario inv = new inventario();
+        inv.setIdInventario((int) Inventario_jTable.getValueAt(fila, 0));
+        inv.setUbicacion(Inventario_jTable.getValueAt(fila, 1).toString());
+
+        return inv;
+    }
 
     /**
      * @param args the command line arguments
@@ -111,7 +281,13 @@ public class FrmInventario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ActualizarInventario;
+    private javax.swing.JButton AgregarInventario;
+    private javax.swing.JButton EditarInventario;
+    private javax.swing.JButton EliminarInventario;
+    private javax.swing.JTable Inventario_jTable;
     private javax.swing.JPanel Main_JPanel;
     private javax.swing.JButton MenuPrincipal_JButton;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

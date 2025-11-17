@@ -1,9 +1,6 @@
 package com.energyvera.view;
 
-import com.energyvera.dao.VendedorDAO;
-import com.energyvera.daoImpl.VendedorDAOImpl;
 import com.energyvera.model.Cliente;
-import com.energyvera.model.vendedor;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,10 +12,12 @@ public class FrmEditarCliente extends javax.swing.JFrame {
     private FrmClientes parentForm;
 
     static private Cliente clienteEditar;
-    private vendedor vendedorEditar;
 
     /**
      * Creates new form FrmEditarCliente
+     *
+     * @param parent
+     * @param clienteEditar
      */
     public FrmEditarCliente(FrmClientes parent, Cliente clienteEditar) {
         initComponents();
@@ -192,8 +191,6 @@ public class FrmEditarCliente extends javax.swing.JFrame {
             parentForm.mostrarListaClientes();
             this.dispose();
 
-
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
                     this,
@@ -206,6 +203,19 @@ public class FrmEditarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_Guardar_jButtonActionPerformed
 
     private void Cancelar_jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancelar_jButton2ActionPerformed
+
+        int opcion = JOptionPane.showConfirmDialog(
+                this,
+                "¿Desea cancelar sin guardar los cambios?",
+                "Confirmar cancelación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            this.dispose();   // Cerrar la ventana
+        }
+
         parentForm.mostrarListaClientes();
         this.dispose();
 
