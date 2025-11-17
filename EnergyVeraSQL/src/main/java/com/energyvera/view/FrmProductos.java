@@ -27,18 +27,32 @@ public class FrmProductos extends javax.swing.JFrame {
     private void initComponents() {
 
         Mina_JPanel = new javax.swing.JPanel();
+        MenuPrincipal_JButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        MenuPrincipal_JButton.setText("MenuPrincipal");
+        MenuPrincipal_JButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuPrincipal_JButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Mina_JPanelLayout = new javax.swing.GroupLayout(Mina_JPanel);
         Mina_JPanel.setLayout(Mina_JPanelLayout);
         Mina_JPanelLayout.setHorizontalGroup(
             Mina_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(Mina_JPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MenuPrincipal_JButton)
+                .addContainerGap(287, Short.MAX_VALUE))
         );
         Mina_JPanelLayout.setVerticalGroup(
             Mina_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Mina_JPanelLayout.createSequentialGroup()
+                .addContainerGap(271, Short.MAX_VALUE)
+                .addComponent(MenuPrincipal_JButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -54,6 +68,12 @@ public class FrmProductos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuPrincipal_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPrincipal_JButtonActionPerformed
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_MenuPrincipal_JButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,6 +111,7 @@ public class FrmProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton MenuPrincipal_JButton;
     private javax.swing.JPanel Mina_JPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,18 +28,32 @@ public class FrmFacturaVenta extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         main_JPanel = new javax.swing.JPanel();
+        MenuPrincipal_JButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        MenuPrincipal_JButton.setText("Menú Principal");
+        MenuPrincipal_JButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuPrincipal_JButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout main_JPanelLayout = new javax.swing.GroupLayout(main_JPanel);
         main_JPanel.setLayout(main_JPanelLayout);
         main_JPanelLayout.setHorizontalGroup(
             main_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(main_JPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MenuPrincipal_JButton)
+                .addContainerGap(284, Short.MAX_VALUE))
         );
         main_JPanelLayout.setVerticalGroup(
             main_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_JPanelLayout.createSequentialGroup()
+                .addContainerGap(271, Short.MAX_VALUE)
+                .addComponent(MenuPrincipal_JButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -66,6 +80,12 @@ public class FrmFacturaVenta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuPrincipal_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPrincipal_JButtonActionPerformed
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_MenuPrincipal_JButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,6 +123,7 @@ public class FrmFacturaVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton MenuPrincipal_JButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel main_JPanel;
     // End of variables declaration//GEN-END:variables

@@ -27,18 +27,32 @@ public class FrmClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         main_jPanel = new javax.swing.JPanel();
+        MenuPrincipal_JButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        MenuPrincipal_JButton.setText("Menú Principal");
+        MenuPrincipal_JButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuPrincipal_JButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout main_jPanelLayout = new javax.swing.GroupLayout(main_jPanel);
         main_jPanel.setLayout(main_jPanelLayout);
         main_jPanelLayout.setHorizontalGroup(
             main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(main_jPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MenuPrincipal_JButton)
+                .addContainerGap(284, Short.MAX_VALUE))
         );
         main_jPanelLayout.setVerticalGroup(
             main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_jPanelLayout.createSequentialGroup()
+                .addContainerGap(271, Short.MAX_VALUE)
+                .addComponent(MenuPrincipal_JButton)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -54,6 +68,12 @@ public class FrmClientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuPrincipal_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPrincipal_JButtonActionPerformed
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_MenuPrincipal_JButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,6 +111,7 @@ public class FrmClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton MenuPrincipal_JButton;
     private javax.swing.JPanel main_jPanel;
     // End of variables declaration//GEN-END:variables
 }
