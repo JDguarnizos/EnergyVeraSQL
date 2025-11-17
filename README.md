@@ -1,2 +1,2 @@
 # EnergyVeraSQL
-Uso de java para une interfaz gráfica para una base de datos. Para Programación de bases de datos.
+Uso de java para una interfaz gráfica para una base de datos. Para Programación de bases de datos.
