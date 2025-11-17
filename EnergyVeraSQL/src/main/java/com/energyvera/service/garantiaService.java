@@ -1,13 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.energyvera.service;
 
-/**
- *
- * @author valen
- */
+import com.energyvera.dao.GarantiaDAO;
+import com.energyvera.daoImpl.GarantiaDAOImpl;
+import com.energyvera.model.garantia;
+import java.util.List;
+
 public class garantiaService {
     
+    private GarantiaDAO garantiaDAO;
+
+    public garantiaService() {
+        this.garantiaDAO = new GarantiaDAOImpl();
+    }
+
+    // Registrar nueva garantía
+    public void registrarGarantia(garantia gar) {
+        garantiaDAO.insertar(gar);
+    }
+
+    // Actualizar garantía existente
+    public void actualizarGarantia(garantia gar) {
+        garantiaDAO.actualizar(gar);
+    }
+
+    // Eliminar garantía por ID
+    public void eliminarGarantia(int id) {
+        garantiaDAO.eliminar(id);
+    }
+
+    // Buscar una garantía por ID
+    public garantia buscarGarantiaPorId(int id) {
+        return garantiaDAO.obtenerPorId(id);
+    }
+
+    // Listar todas las garantías
+    public List<garantia> listarGarantias() {
+        return garantiaDAO.obtenerTodos();
+    }
 }
