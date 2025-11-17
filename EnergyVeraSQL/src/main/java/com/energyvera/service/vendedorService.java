@@ -1,13 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.energyvera.service;
 
-/**
- *
- * @author valen
- */
+import com.energyvera.dao.VendedorDAO;
+import com.energyvera.dao.FacturaVentaDAO;
+import com.energyvera.model.vendedor;
+import com.energyvera.model.facturaVenta;
+
+import java.util.List;
+
 public class vendedorService {
-    
+
+    private final VendedorDAO vendedorDAO;
+    private final FacturaVentaDAO facturaVentaDAO;
+
+    public vendedorService(VendedorDAO vendedorDAO, FacturaVentaDAO facturaVentaDAO) {
+        this.vendedorDAO = vendedorDAO;
+        this.facturaVentaDAO = facturaVentaDAO;
+    }
+
+    public void registrarVendedor(vendedor vendedor) {
+        vendedorDAO.insertar(vendedor);
+    }
+
+    public void actualizarCargos(vendedor vendedor) {
+        vendedorDAO.actualizar(vendedor);
+    }
+
+    public vendedor buscarVendedor(int idVendedor) {
+        return vendedorDAO.obtenerPorId(idVendedor);
+    }
+
+    public List<facturaVenta> verVentasDelVendedor(int idVendedor) {
+        return facturaVentaDAO.obtenerPorIdVendedor(idVendedor);
+    }
 }
