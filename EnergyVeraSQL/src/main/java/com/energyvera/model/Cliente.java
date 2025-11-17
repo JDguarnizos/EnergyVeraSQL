@@ -10,7 +10,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int idCliente, String nombre, String direccion, String telefono, String email) {
+    public Cliente(int idCliente, String nombre, String direccion, String email) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.direccion = direccion;
