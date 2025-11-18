@@ -222,25 +222,24 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_FacturasCompra_JButtonActionPerformed
 
     private void Inventario_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventario_JButtonActionPerformed
-        FrmInventario ventanaInv = new FrmInventario();
+        FrmInventario ventanaInv = new FrmInventario(); //Ya después preguntaré si rehago esto xd
         ventanaInv.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_Inventario_JButtonActionPerformed
 
     private void Garantias_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Garantias_JButtonActionPerformed
-        FrmGarantias ventanaGa = new FrmGarantias(garService); //Por hacer
+        FrmGarantias ventanaGa = new FrmGarantias(garService);
         ventanaGa.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_Garantias_JButtonActionPerformed
 
     private void Vendedores_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Vendedores_JButtonActionPerformed
-        FrmVendedores ventanaVe = new FrmVendedores(); //Por hacer
+        FrmVendedores ventanaVe = new FrmVendedores(vendorService); //Por hacer
         ventanaVe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_Vendedores_JButtonActionPerformed
 
     private void Proveedores_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Proveedores_JButtonActionPerformed
-        FrmProveedores ventanaProv = new FrmProveedores(); /Por hacer
+        FrmProveedores ventanaProv = new FrmProveedores();
         ventanaProv.setVisible(rootPaneCheckingEnabled);
         this.dispose();
     }//GEN-LAST:event_Proveedores_JButtonActionPerformed
