@@ -228,19 +228,19 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_Inventario_JButtonActionPerformed
 
     private void Garantias_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Garantias_JButtonActionPerformed
-        FrmGarantias ventanaGa = new FrmGarantias();
+        FrmGarantias ventanaGa = new FrmGarantias(garService); //Por hacer
         ventanaGa.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_Garantias_JButtonActionPerformed
 
     private void Vendedores_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Vendedores_JButtonActionPerformed
-        FrmVendedores ventanaVe = new FrmVendedores();
+        FrmVendedores ventanaVe = new FrmVendedores(); //Por hacer
         ventanaVe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_Vendedores_JButtonActionPerformed
 
     private void Proveedores_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Proveedores_JButtonActionPerformed
-        FrmProveedores ventanaProv = new FrmProveedores();
+        FrmProveedores ventanaProv = new FrmProveedores(); /Por hacer
         ventanaProv.setVisible(rootPaneCheckingEnabled);
         this.dispose();
     }//GEN-LAST:event_Proveedores_JButtonActionPerformed
