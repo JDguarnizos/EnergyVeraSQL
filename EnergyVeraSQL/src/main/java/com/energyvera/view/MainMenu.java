@@ -204,7 +204,7 @@ public class MainMenu extends javax.swing.JFrame {
     del tipo requerido en el paquete y desecha la ventana de menú principal.
      */
     private void Productos_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Productos_JButtonActionPerformed
-        FrmProductos ventanaPr = new FrmProductos();
+        FrmProductos ventanaPr = new FrmProductos(prodService);
         ventanaPr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_Productos_JButtonActionPerformed
@@ -216,7 +216,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_Clientes_JButtonActionPerformed
 
     private void FacturasCompra_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturasCompra_JButtonActionPerformed
-        FrmFacturaVenta ventanaFactVenta = new FrmFacturaVenta();
+        FrmFacturaVenta ventanaFactVenta = new FrmFacturaVenta(factventService);
         ventanaFactVenta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_FacturasCompra_JButtonActionPerformed
