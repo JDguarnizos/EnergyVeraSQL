@@ -4,8 +4,6 @@
  */
 package com.energyvera.view;
 
-import com.energyvera.dao.ClienteDAO;
-import com.energyvera.daoImpl.ClienteDAOImpl;
 import com.energyvera.service.*;
 
 /**
@@ -14,17 +12,19 @@ import com.energyvera.service.*;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    private clienteService cteService;
-
-    boolean clientesetted = false;
+    clienteService clienteserv;
+    facturaVentaService factventService;
+    facturaCompraService factCompService;
+    contabilidadService contService;
+    garantiaService garService;
+    productoService prodService;
+    vendedorService vendorService;
 
     /**
      * Creates new form MainMenu
      */
     public MainMenu() {
         initComponents();
-        ClienteDAO dao = new ClienteDAOImpl();
-        cteService = new clienteService(dao);
     }
 
     /**
@@ -39,7 +39,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Energyvera_jLabel = new javax.swing.JLabel();
         MenuPrincipal_jLabel = new javax.swing.JLabel();
-        Facturas_JButton = new javax.swing.JButton();
+        FacturasCompra_JButton = new javax.swing.JButton();
         Clientes_JButton = new javax.swing.JButton();
         Inventario_JButton = new javax.swing.JButton();
         Garantias_JButton = new javax.swing.JButton();
@@ -47,6 +47,7 @@ public class MainMenu extends javax.swing.JFrame {
         Proveedores_JButton = new javax.swing.JButton();
         Productos_JButton = new javax.swing.JButton();
         SeleccionaOpcion_jLabel = new javax.swing.JLabel();
+        FacturasVenta_jButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,10 +57,10 @@ public class MainMenu extends javax.swing.JFrame {
         MenuPrincipal_jLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         MenuPrincipal_jLabel.setText("Menú Principal");
 
-        Facturas_JButton.setText("Facturas");
-        Facturas_JButton.addActionListener(new java.awt.event.ActionListener() {
+        FacturasCompra_JButton.setText("Facturas de Compra");
+        FacturasCompra_JButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Facturas_JButtonActionPerformed(evt);
+                FacturasCompra_JButtonActionPerformed(evt);
             }
         });
 
@@ -107,6 +108,13 @@ public class MainMenu extends javax.swing.JFrame {
 
         SeleccionaOpcion_jLabel.setText("Seleccione una opción a administrar:");
 
+        FacturasVenta_jButton.setText("Facturas de Venta");
+        FacturasVenta_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FacturasVenta_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -116,25 +124,24 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(SeleccionaOpcion_jLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(Clientes_JButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Facturas_JButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(Inventario_JButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Vendedores_JButton))
-                                    .addGap(13, 13, 13)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Proveedores_JButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Garantias_JButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Productos_JButton)
-                                .addGap(62, 62, 62))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Vendedores_JButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Productos_JButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Proveedores_JButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Garantias_JButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(Clientes_JButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Inventario_JButton, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FacturasVenta_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(FacturasCompra_JButton, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -160,19 +167,21 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Facturas_JButton)
+                            .addComponent(FacturasCompra_JButton)
                             .addComponent(Clientes_JButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Inventario_JButton)
-                            .addComponent(Garantias_JButton))
+                            .addComponent(FacturasVenta_jButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Vendedores_JButton)
-                            .addComponent(Proveedores_JButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Productos_JButton)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                            .addComponent(Garantias_JButton))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Productos_JButton)
+                    .addComponent(Proveedores_JButton))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,6 +199,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Nada de conectar botones, directamente se relaciona su acción con código
+    //Por algo existe eso del doble click en netbeans
     /*Todos los métodos de JButtonActionPerfomed abren una nueva clase 
     del tipo requerido en el paquete y desecha la ventana de menú principal.
      */
@@ -200,18 +210,16 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_Productos_JButtonActionPerformed
 
     private void Clientes_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clientes_JButtonActionPerformed
-
-        FrmClientes ventana = new FrmClientes(cteService);
-        ventana.setVisible(true);
-
-
+        FrmClientes ventanaCl = new FrmClientes(clienteserv);
+        ventanaCl.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_Clientes_JButtonActionPerformed
 
-    private void Facturas_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Facturas_JButtonActionPerformed
-        FrmFacturaVenta ventanaF = new FrmFacturaVenta();
-        ventanaF.setVisible(true);
+    private void FacturasCompra_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturasCompra_JButtonActionPerformed
+        FrmFacturaVenta ventanaFactVenta = new FrmFacturaVenta();
+        ventanaFactVenta.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_Facturas_JButtonActionPerformed
+    }//GEN-LAST:event_FacturasCompra_JButtonActionPerformed
 
     private void Inventario_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventario_JButtonActionPerformed
         FrmInventario ventanaInv = new FrmInventario();
@@ -237,8 +245,26 @@ public class MainMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_Proveedores_JButtonActionPerformed
 
-    public void setServices(clienteService clienteServicepls) {
-        cteService = clienteServicepls;
+    private void FacturasVenta_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturasVenta_jButtonActionPerformed
+        FrmFacturaVenta ventanaF = new FrmFacturaVenta(factventService);
+        ventanaF.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_FacturasVenta_jButtonActionPerformed
+
+    public void setServices(clienteService clienteService,
+            facturaVentaService facturaVenta,
+            facturaCompraService factCompService,
+            contabilidadService contService,
+            garantiaService garService,
+            productoService prodService,
+            vendedorService vendorService
+    ) {
+        this.clienteserv = clienteService;
+        this.factventService = facturaVenta;
+        this.factCompService = factCompService;
+        this.contService = contService;
+        this.garService = garService;
+        this.vendorService = vendorService;
     }
 
     /**
@@ -279,7 +305,8 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Clientes_JButton;
     private javax.swing.JLabel Energyvera_jLabel;
-    private javax.swing.JButton Facturas_JButton;
+    private javax.swing.JButton FacturasCompra_JButton;
+    private javax.swing.JButton FacturasVenta_jButton;
     private javax.swing.JButton Garantias_JButton;
     private javax.swing.JButton Inventario_JButton;
     private javax.swing.JLabel MenuPrincipal_jLabel;

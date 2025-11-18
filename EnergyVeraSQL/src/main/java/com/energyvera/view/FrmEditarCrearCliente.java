@@ -1,38 +1,31 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package com.energyvera.view;
 
 import com.energyvera.model.Cliente;
+import com.energyvera.service.clienteService;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author PC-PERSONAL
  */
-public class FrmEditarCliente extends javax.swing.JFrame {
-
-    private FrmClientes parentForm;
+public class FrmEditarCrearCliente extends javax.swing.JFrame {
 
     static private Cliente clienteEditar;
+    //Se puede enviar un cliente nulo para crearlo
+    static private clienteService serviceCli;
 
+    //Necesario para llamar de vuelta frmclientes y para añadir el cliente
     /**
      * Creates new form FrmEditarCliente
-     *
-     * @param parent
-     * @param clienteEditar
      */
-    public FrmEditarCliente(FrmClientes parent, Cliente clienteEditar) {
-        initComponents();
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        this.parentForm = parent;
+    public FrmEditarCrearCliente(Cliente clienteEditar, clienteService servicioCli) {
         this.clienteEditar = clienteEditar;
-
-        if (clienteEditar != null) {
-            obtenerDatos();  // ← carga los datos en los campos
-        } else {
-            Codigo_jTextField.setEditable(false);
-            Codigo_jTextField.setText("AUTO");
-        }
+        this.serviceCli = servicioCli;
+        initComponents();
     }
 
     /**
@@ -44,21 +37,21 @@ public class FrmEditarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        Titulo_JLabel = new javax.swing.JLabel();
         Codigo_jTextField = new javax.swing.JTextField();
         Nombre_jTextField = new javax.swing.JTextField();
         Direccion_jTextField3 = new javax.swing.JTextField();
         Email_jTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        Codigo_JLabel = new javax.swing.JLabel();
+        Nombre_JLabel = new javax.swing.JLabel();
+        Direccion_JLabel = new javax.swing.JLabel();
+        Correo_JLabel = new javax.swing.JLabel();
         Guardar_jButton = new javax.swing.JButton();
         Cancelar_jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Editar Cliente");
+        Titulo_JLabel.setText("Error: modo no establecido");
 
         Codigo_jTextField.setText("error");
 
@@ -73,15 +66,15 @@ public class FrmEditarCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Código");
+        Codigo_JLabel.setText("Código");
 
-        jLabel3.setText("Nombre");
+        Nombre_JLabel.setText("Nombre");
 
-        jLabel4.setText("Dirección");
+        Direccion_JLabel.setText("Dirección");
 
-        jLabel5.setText("Correo");
+        Correo_JLabel.setText("Correo");
 
-        Guardar_jButton.setText("Guardar");
+        Guardar_jButton.setText("error");
         Guardar_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Guardar_jButtonActionPerformed(evt);
@@ -110,10 +103,10 @@ public class FrmEditarCliente extends javax.swing.JFrame {
                                 .addComponent(Guardar_jButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(Direccion_JLabel)
+                                    .addComponent(Correo_JLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Nombre_JLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Codigo_JLabel, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Email_jTextField)
@@ -122,30 +115,30 @@ public class FrmEditarCliente extends javax.swing.JFrame {
                                     .addComponent(Codigo_jTextField)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(169, 169, 169)
-                        .addComponent(jLabel1)))
+                        .addComponent(Titulo_JLabel)))
                 .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jLabel1)
+                .addComponent(Titulo_JLabel)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Codigo_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(Codigo_JLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(Nombre_JLabel)
                     .addComponent(Nombre_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(Direccion_JLabel)
                     .addComponent(Direccion_jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Email_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(Correo_JLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Guardar_jButton)
@@ -156,93 +149,113 @@ public class FrmEditarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Deprecated
     private void Email_jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Email_jTextFieldActionPerformed
-        // TODO add your handling code here:
+        //Cliqué 2 veces, lo siento
     }//GEN-LAST:event_Email_jTextFieldActionPerformed
 
     private void Guardar_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar_jButtonActionPerformed
         try {
-            // Si clienteEditar es null → es un cliente nuevo
-            if (clienteEditar == null) {
-                Cliente nuevo = new Cliente();
-                nuevo.setNombre(Nombre_jTextField.getText());
-                nuevo.setDireccion(Direccion_jTextField3.getText());
-                nuevo.setEmail(Email_jTextField.getText());
-
-                // Llamar a tu DAO
-                com.energyvera.daoImpl.ClienteDAOImpl dao = new com.energyvera.daoImpl.ClienteDAOImpl();
-                dao.insertar(nuevo);
-
-                JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente.");
-            } else {
-                // Editar cliente existente
-                clienteEditar.setNombre(Nombre_jTextField.getText());
-                clienteEditar.setDireccion(Direccion_jTextField3.getText());
-                clienteEditar.setEmail(Email_jTextField.getText());
-
-                // Llamar al DAO para actualizar
-                com.energyvera.daoImpl.ClienteDAOImpl dao = new com.energyvera.daoImpl.ClienteDAOImpl();
-                dao.actualizar(clienteEditar);
-
-                JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente.");
+            //Verificar que los campos no estén vacíos
+            if (Direccion_jTextField3.getText().isBlank()
+                    || Codigo_jTextField.getText().isBlank()
+                    || Nombre_jTextField.getText().isBlank()
+                    || Email_jTextField.getText().isBlank()) {
+                throw new NullPointerException("");
             }
-
-            // Cerrar la ventana
-            parentForm.mostrarListaClientes();
-            this.dispose();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Error: verifique los datos ingresados",
-                    "Gestión EnergyVera",
-                    JOptionPane.ERROR_MESSAGE
-            );
+            int id_cliente = Integer.parseInt(Codigo_jTextField.getText());
+            clienteEditar.setIdCliente(id_cliente);
+            clienteEditar.setNombre(Nombre_jTextField.getText());
+            clienteEditar.setDireccion(Direccion_jTextField3.getText());
+            clienteEditar.setEmail(Email_jTextField.getText());
+        } catch (NumberFormatException n) {
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Asegurese que los campos númericos no contengan espacios ni puntos", 2);
+            return;
+        } catch (NullPointerException p){
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Asegurese que todos los campos estén rellenados", 2);
         }
-
+        //Detectar si estamos creando un nuevo cliente o editando uno actual para actualizarlo o guardarlo
+        if (clienteEditar != null) {
+            serviceCli.actualizarCliente(clienteEditar);
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Cliente" + clienteEditar.getNombre() + " editado exitosamente!", 2);
+        } else {
+            serviceCli.registrarCliente(clienteEditar);
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Cliente" + clienteEditar.getNombre() + " añadido exitosamente!", 2);
+        }
+        FrmClientes cliForm = new FrmClientes(serviceCli);
+        this.dispose();
     }//GEN-LAST:event_Guardar_jButtonActionPerformed
 
     private void Cancelar_jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancelar_jButton2ActionPerformed
-
-        int opcion = JOptionPane.showConfirmDialog(
-                this,
-                "¿Desea cancelar sin guardar los cambios?",
-                "Confirmar cancelación",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.WARNING_MESSAGE
-        );
-
-        if (opcion == JOptionPane.YES_OPTION) {
-            this.dispose();   // Cerrar la ventana
-        }
-
-        parentForm.mostrarListaClientes();
+        FrmClientes cliForm = new FrmClientes(serviceCli);
         this.dispose();
-
     }//GEN-LAST:event_Cancelar_jButton2ActionPerformed
 
-    public void obtenerDatos() {
-        Codigo_jTextField.setText(String.valueOf(clienteEditar.getIdCliente()));
-        Nombre_jTextField.setText(clienteEditar.getNombre());
-        Direccion_jTextField3.setText(clienteEditar.getDireccion());
-        Email_jTextField.setText(clienteEditar.getEmail());
+    public void inicializarVista() {
+        if (clienteEditar != null) {
+            Titulo_JLabel.setText("Editar Cliente");
+            Codigo_jTextField.setText(String.valueOf(clienteEditar.getIdCliente()));
+            Nombre_jTextField.setText(clienteEditar.getNombre());
+            Direccion_jTextField3.setText(clienteEditar.getDireccion());
+            Email_jTextField.setText(clienteEditar.getEmail());
+            Guardar_jButton.setText("Guardar");
+        } else {
+            Titulo_JLabel.setText("Añadir Cliente");
+            Codigo_jTextField.setText("Número sin espacios ni letras");
+            Nombre_jTextField.setText("");
+            Direccion_jTextField3.setText("");
+            Email_jTextField.setText("");
+            Guardar_jButton.setText("Añadir");
+        }
     }
 
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmEditarCrearCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmEditarCrearCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmEditarCrearCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmEditarCrearCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrmEditarCrearCliente(clienteEditar, serviceCli).setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar_jButton2;
+    private javax.swing.JLabel Codigo_JLabel;
     private javax.swing.JTextField Codigo_jTextField;
+    private javax.swing.JLabel Correo_JLabel;
+    private javax.swing.JLabel Direccion_JLabel;
     private javax.swing.JTextField Direccion_jTextField3;
     private javax.swing.JTextField Email_jTextField;
     private javax.swing.JButton Guardar_jButton;
+    private javax.swing.JLabel Nombre_JLabel;
     private javax.swing.JTextField Nombre_jTextField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel Titulo_JLabel;
     // End of variables declaration//GEN-END:variables
 }

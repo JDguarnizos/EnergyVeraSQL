@@ -4,17 +4,28 @@
  */
 package com.energyvera.view;
 
+//Mismo Código, diferentes servicios y clases
+import com.energyvera.model.producto;
+import com.energyvera.service.productoService;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author PC-PERSONAL
  */
 public class FrmProductos extends javax.swing.JFrame {
 
+    static private productoService prodService;
+    static private DefaultTableModel listaModelo;
+
     /**
-     * Creates new form FrmProductos
+     * Creates new form FrmClientes
      */
-    public FrmProductos() {
+    public FrmProductos(productoService prodService) {
+        this.prodService = prodService;
         initComponents();
+        mostrarLista();
     }
 
     /**
@@ -26,31 +37,122 @@ public class FrmProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Mina_JPanel = new javax.swing.JPanel();
+        main_jPanel = new javax.swing.JPanel();
         MenuPrincipal_JButton = new javax.swing.JButton();
+        Title_jLabel = new javax.swing.JLabel();
+        EnergyVera_jLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        VistaFactVenta_jTable = new javax.swing.JTable();
+        Anadir_jButton = new javax.swing.JButton();
+        Editar_jButton = new javax.swing.JButton();
+        Eliminar_JButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MenuPrincipal_JButton.setText("MenuPrincipal");
+        MenuPrincipal_JButton.setText("Menú Principal");
         MenuPrincipal_JButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuPrincipal_JButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout Mina_JPanelLayout = new javax.swing.GroupLayout(Mina_JPanel);
-        Mina_JPanel.setLayout(Mina_JPanelLayout);
-        Mina_JPanelLayout.setHorizontalGroup(
-            Mina_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Mina_JPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(MenuPrincipal_JButton)
-                .addContainerGap(287, Short.MAX_VALUE))
+        Title_jLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Title_jLabel.setText("Productos");
+
+        EnergyVera_jLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EnergyVera_jLabel.setText("Gestión EnergyVera");
+
+        VistaFactVenta_jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Marca", "Precio", "Stock", "Tipo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(VistaFactVenta_jTable);
+
+        Anadir_jButton.setText("Añadir Factura");
+        Anadir_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Anadir_jButtonActionPerformed(evt);
+            }
+        });
+
+        Editar_jButton.setText("Editar Factura Seleccionada");
+        Editar_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar_jButtonActionPerformed(evt);
+            }
+        });
+
+        Eliminar_JButton.setText("Eliminar Factura");
+        Eliminar_JButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Eliminar_JButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout main_jPanelLayout = new javax.swing.GroupLayout(main_jPanel);
+        main_jPanel.setLayout(main_jPanelLayout);
+        main_jPanelLayout.setHorizontalGroup(
+            main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(main_jPanelLayout.createSequentialGroup()
+                .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(EnergyVera_jLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(main_jPanelLayout.createSequentialGroup()
+                                .addComponent(Anadir_jButton)
+                                .addGap(116, 116, 116)
+                                .addComponent(Eliminar_JButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addComponent(Editar_jButton))
+                            .addGroup(main_jPanelLayout.createSequentialGroup()
+                                .addComponent(MenuPrincipal_JButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
+            .addGroup(main_jPanelLayout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(Title_jLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        Mina_JPanelLayout.setVerticalGroup(
-            Mina_JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Mina_JPanelLayout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
+        main_jPanelLayout.setVerticalGroup(
+            main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_jPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(EnergyVera_jLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Title_jLabel)
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Anadir_jButton)
+                    .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Eliminar_JButton)
+                        .addComponent(Editar_jButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(MenuPrincipal_JButton)
                 .addContainerGap())
         );
@@ -59,21 +161,85 @@ public class FrmProductos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Mina_JPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(main_jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Mina_JPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(main_jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void MenuPrincipal_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPrincipal_JButtonActionPerformed
         MainMenu menu = new MainMenu();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_MenuPrincipal_JButtonActionPerformed
+
+    private void Editar_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar_jButtonActionPerformed
+        try {
+            if (VistaFactVenta_jTable.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Debe seleccionar una factura o añadir una si no hay.", 2);
+            } else {
+                int seleccionado = VistaFactVenta_jTable.getSelectedRow();
+                producto facturaEditado = prodService.obtenerProductoPorId(Integer.parseInt(VistaFactVenta_jTable.getValueAt(seleccionado, 0).toString()));
+
+                FrmEditarCrearProducto ventEditarFact = new FrmEditarCrearProducto(facturaEditado, prodService);
+                ventEditarFact.inicializarVista();
+                ventEditarFact.setVisible(true);
+                this.dispose();
+            }
+        } catch (Exception NumberFormatException) {
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Ingrese un valor válido", 3);
+        }
+    }//GEN-LAST:event_Editar_jButtonActionPerformed
+
+    private void Anadir_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Anadir_jButtonActionPerformed
+        producto facturaAnadir = null;
+        FrmEditarCrearProducto ventAnadirFact = new FrmEditarCrearProducto(facturaAnadir,prodService);
+        ventAnadirFact.inicializarVista();
+        ventAnadirFact.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_Anadir_jButtonActionPerformed
+
+    private void Eliminar_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_JButtonActionPerformed
+        if (VistaFactVenta_jTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Debe seleccionar un cliente o añadir uno si no hay.", 2);
+        }
+        int op = JOptionPane.showConfirmDialog(this, "EnergyVera", "¿Deseas eliminar el cliente de la lista?", JOptionPane.YES_NO_OPTION, 1);
+        if (op == JOptionPane.YES_OPTION) {
+            int seleccionado = VistaFactVenta_jTable.getSelectedRow();
+            prodService.eliminarProducto(Integer.parseInt(VistaFactVenta_jTable.getValueAt(seleccionado, 0).toString()));
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Cliente Eliminado Exitosamente", 2);
+        } else {
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Eliminación cancelada", 2);
+        }
+    }//GEN-LAST:event_Eliminar_JButtonActionPerformed
+
+    public void mostrarLista() {
+        listaModelo = new DefaultTableModel(
+                new Object[]{"Código", "Marca", "Precio", "Stock","Tipo"}, 0
+        );
+        VistaFactVenta_jTable.setModel(listaModelo);
+        if (prodService.listarProductos()== null) {
+            return;
+        }
+
+        listaModelo.setRowCount(0);
+
+        for (producto f : prodService.listarProductos()) {
+            listaModelo.addRow(new Object[]{
+                f.getIdProducto(),
+                f.getMarca(),
+                f.getPrecio(),
+                f.getStock(),
+                f.getTipo()
+            });
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -101,17 +267,28 @@ public class FrmProductos extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmProductos().setVisible(true);
+                new FrmProductos(prodService).setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Anadir_jButton;
+    private javax.swing.JButton Editar_jButton;
+    private javax.swing.JButton Eliminar_JButton;
+    private javax.swing.JLabel EnergyVera_jLabel;
     private javax.swing.JButton MenuPrincipal_JButton;
-    private javax.swing.JPanel Mina_JPanel;
+    private javax.swing.JLabel Title_jLabel;
+    private javax.swing.JTable VistaFactVenta_jTable;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel main_jPanel;
     // End of variables declaration//GEN-END:variables
 }

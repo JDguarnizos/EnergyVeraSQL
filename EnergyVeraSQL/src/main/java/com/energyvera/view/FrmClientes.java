@@ -4,8 +4,6 @@
  */
 package com.energyvera.view;
 
-import com.energyvera.dao.ClienteDAO;
-import com.energyvera.daoImpl.ClienteDAOImpl;
 import com.energyvera.model.Cliente;
 import com.energyvera.service.clienteService;
 import javax.swing.JOptionPane;
@@ -24,9 +22,9 @@ public class FrmClientes extends javax.swing.JFrame {
      * Creates new form FrmClientes
      */
     public FrmClientes(clienteService cteService) {
-        this.cteService = cteService;
         initComponents();
-        mostrarListaClientes();
+        mostrarLista();
+        //Gracias david por recordarme que puedo poner los métodos acá
     }
 
     /**
@@ -46,8 +44,7 @@ public class FrmClientes extends javax.swing.JFrame {
         VistaClientes_jTable = new javax.swing.JTable();
         AnadirCliente_jButton = new javax.swing.JButton();
         EditarCliente_jButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        Eliminar = new javax.swing.JButton();
+        Eliminar_JButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,17 +100,10 @@ public class FrmClientes extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Actualizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar_JButton.setText("Eliminar Cliente");
+        Eliminar_JButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        Eliminar.setText("Eliminar Cliente");
-        Eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarActionPerformed(evt);
+                Eliminar_JButtonActionPerformed(evt);
             }
         });
 
@@ -123,30 +113,30 @@ public class FrmClientes extends javax.swing.JFrame {
             main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(main_jPanelLayout.createSequentialGroup()
                 .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(main_jPanelLayout.createSequentialGroup()
-                        .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(main_jPanelLayout.createSequentialGroup()
-                                .addGap(197, 197, 197)
-                                .addComponent(EnergyVera_jLabel))
-                            .addGroup(main_jPanelLayout.createSequentialGroup()
-                                .addGap(250, 250, 250)
-                                .addComponent(Title_jLabel)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_jPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, main_jPanelLayout.createSequentialGroup()
                                 .addComponent(AnadirCliente_jButton)
+                                .addGap(99, 99, 99)
+                                .addComponent(Eliminar_JButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Eliminar)
-                                .addGap(67, 67, 67)
                                 .addComponent(EditarCliente_jButton))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
-                            .addGroup(main_jPanelLayout.createSequentialGroup()
-                                .addComponent(MenuPrincipal_JButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)))
+                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(EnergyVera_jLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(main_jPanelLayout.createSequentialGroup()
+                .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(MenuPrincipal_JButton))
+                    .addGroup(main_jPanelLayout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(Title_jLabel)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         main_jPanelLayout.setVerticalGroup(
             main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,11 +151,9 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EditarCliente_jButton)
                     .addComponent(AnadirCliente_jButton)
-                    .addComponent(Eliminar))
+                    .addComponent(Eliminar_JButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(main_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MenuPrincipal_JButton)
-                    .addComponent(jButton1))
+                .addComponent(MenuPrincipal_JButton)
                 .addContainerGap())
         );
 
@@ -191,88 +179,46 @@ public class FrmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuPrincipal_JButtonActionPerformed
 
     private void EditarCliente_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarCliente_jButtonActionPerformed
+        try {
+            if (VistaClientes_jTable.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Debe seleccionar un cliente o añadir uno si no hay.", 2);
+            } else {
+                int seleccionado = VistaClientes_jTable.getSelectedRow();
+                Cliente clienteEditado = cteService.buscarCliente(Integer.parseInt(VistaClientes_jTable.getValueAt(seleccionado, 0).toString()));
 
-        Cliente clienteSeleccionado = obtenerClienteSeleccionado();
-
-        if (clienteSeleccionado == null) {
-            return; // No hay selección
-        }
-
-        // Crear ventana de edición EN MODO EDITAR
-        FrmEditarCliente ventana = new FrmEditarCliente(this, clienteSeleccionado);
-
-        // cuando se cierre, refrescar la tabla
-        ventana.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                mostrarListaClientes();
+                FrmEditarCrearCliente ventEditarCli = new FrmEditarCrearCliente(clienteEditado, cteService);
+                ventEditarCli.inicializarVista();
+                ventEditarCli.setVisible(true);
+                this.dispose();
             }
-        });
-
-        ventana.setVisible(true);
-
-
+        } catch (Exception NumberFormatException) {
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Ingrese un valor válido", 3);
+        }
     }//GEN-LAST:event_EditarCliente_jButtonActionPerformed
 
     private void AnadirCliente_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnadirCliente_jButtonActionPerformed
-
-        // Abrir el formulario en modo "nuevo cliente"
-        FrmEditarCliente ventana = new FrmEditarCliente(this, null);
-
-        // Cuando el usuario cierre la ventana, recargar la tabla
-        ventana.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
-                mostrarListaClientes();   // ← ESTE ES EL NOMBRE CORRECTO
-            }
-        });
-
-        ventana.setVisible(true);
-
+        Cliente clienteAnadir = null;
+        FrmEditarCrearCliente ventAnadirCli = new FrmEditarCrearCliente(clienteAnadir, cteService);
+        ventAnadirCli.inicializarVista();
+        ventAnadirCli.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_AnadirCliente_jButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    mostrarListaClientes(); // Este boton es para actualizar pero me dio pereza cambiar el nombre sorry
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void Eliminar_JButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Eliminar_JButtonActionPerformed
+        if (VistaClientes_jTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Debe seleccionar un cliente o añadir uno si no hay.", 2);
+        }
+        int op = JOptionPane.showConfirmDialog(this, "EnergyVera", "¿Deseas eliminar el cliente de la lista?", JOptionPane.YES_NO_OPTION, 1);
+        if (op == JOptionPane.YES_OPTION) {
+            int seleccionado = VistaClientes_jTable.getSelectedRow();
+            Cliente clienteEditado = cteService.buscarCliente(Integer.parseInt(VistaClientes_jTable.getValueAt(seleccionado, 0).toString()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Gestión EnergyVera", "Eliminación cancelada", 2);
+        }
+    }//GEN-LAST:event_Eliminar_JButtonActionPerformed
 
-    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
-  int fila = VistaClientes_jTable.getSelectedRow();
-
-    if (fila == -1) {
-        JOptionPane.showMessageDialog(this, 
-                "Seleccione un cliente de la tabla", 
-                "Advertencia",
-                JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-
-    // Preguntar confirmación
-    int confirm = JOptionPane.showConfirmDialog(this,
-            "¿Está seguro de eliminar a este cliente?",
-            "Confirmar eliminación",
-            JOptionPane.YES_NO_OPTION);
-
-    if (confirm != JOptionPane.YES_OPTION) {
-        return;
-    }
-
-    // Obtener ID del cliente seleccionado
-    int idCliente = (int) VistaClientes_jTable.getValueAt(fila, 0);
-
-    // Ejecutar eliminación usando el clienteService
-    cteService.eliminarCliente(idCliente);
-
-    // Refrescar tabla
-    mostrarListaClientes();
-
-    JOptionPane.showMessageDialog(this,
-            "Cliente eliminado correctamente",
-            "Información",
-            JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_EliminarActionPerformed
-
-    public void mostrarListaClientes() {
+    public void mostrarLista() {
         listaModelo = new DefaultTableModel(
                 new Object[]{"Código", "Nombre", "Dirección", "Email"}, 0
         );
@@ -291,21 +237,6 @@ public class FrmClientes extends javax.swing.JFrame {
                 c.getEmail()
             });
         }
-    }
-
-    private Cliente obtenerClienteSeleccionado() {
-        int fila = VistaClientes_jTable.getSelectedRow();
-
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un cliente primero.");
-            return null;
-        }
-
-        // Tomar el ID (columna 0)
-        int idCliente = Integer.parseInt(VistaClientes_jTable.getValueAt(fila, 0).toString());
-
-        // Obtener el cliente desde el service
-        return cteService.buscarCliente(idCliente);
     }
 
     /**
@@ -335,26 +266,23 @@ public class FrmClientes extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        ClienteDAO dao = new ClienteDAOImpl();
-        clienteService service = new clienteService(dao);
-
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmClientes(service).setVisible(true);
+                new FrmClientes(cteService).setVisible(true);
             }
         });
-    }
 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AnadirCliente_jButton;
     private javax.swing.JButton EditarCliente_jButton;
-    private javax.swing.JButton Eliminar;
+    private javax.swing.JButton Eliminar_JButton;
     private javax.swing.JLabel EnergyVera_jLabel;
     private javax.swing.JButton MenuPrincipal_JButton;
     private javax.swing.JLabel Title_jLabel;
     private javax.swing.JTable VistaClientes_jTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel main_jPanel;
     // End of variables declaration//GEN-END:variables

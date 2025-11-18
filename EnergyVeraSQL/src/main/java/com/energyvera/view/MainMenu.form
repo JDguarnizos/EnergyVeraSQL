@@ -43,30 +43,29 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="SeleccionaOpcion_jLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="37" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="Clientes_JButton" min="-2" pref="93" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="Facturas_JButton" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="Vendedores_JButton" max="32767" attributes="0"/>
+                                      <Component id="Productos_JButton" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="Inventario_JButton" max="32767" attributes="0"/>
-                                          <Component id="Vendedores_JButton" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="Proveedores_JButton" max="32767" attributes="0"/>
-                                          <Component id="Garantias_JButton" min="-2" pref="95" max="-2" attributes="0"/>
-                                      </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="Proveedores_JButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Garantias_JButton" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="54" max="-2" attributes="0"/>
-                                  <Component id="Productos_JButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="Clientes_JButton" max="32767" attributes="0"/>
+                                      <Component id="Inventario_JButton" pref="92" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="FacturasVenta_jButton" max="32767" attributes="0"/>
+                                      <Component id="FacturasCompra_JButton" pref="137" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -103,24 +102,27 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Facturas_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="FacturasCompra_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="Clientes_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Inventario_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Garantias_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="FacturasVenta_jButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Vendedores_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Proveedores_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Garantias_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="Productos_JButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="56" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Productos_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Proveedores_JButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="62" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -142,12 +144,12 @@
             <Property name="text" type="java.lang.String" value="Men&#xfa; Principal"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="Facturas_JButton">
+        <Component class="javax.swing.JButton" name="FacturasCompra_JButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Facturas"/>
+            <Property name="text" type="java.lang.String" value="Facturas de Compra"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Facturas_JButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FacturasCompra_JButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Clientes_JButton">
@@ -202,6 +204,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Seleccione una opci&#xf3;n a administrar:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="FacturasVenta_jButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Facturas de Venta"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FacturasVenta_jButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
